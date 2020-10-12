@@ -1,0 +1,110 @@
+form {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 600px;
+}
+form h1 {
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  font-family: 'Open Sans';
+  font-weight: 100;
+  text-align: center;
+  color: #0288D1;
+  border-bottom: 1px solid #ccc;
+}
+form .row {
+  margin-bottom: 25px;
+  position: relative;
+  overflow: hidden;
+}
+form input[type="text"], form input[type="password"], form textarea {
+  width: 100%;
+  height: 40px;
+  padding: 10px 10px 10px 90px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  color: #333;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
+  transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
+}
+
+form input[type="text"] + label, form input[type="password"] + label, form textarea + label {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  font-weight: bold;
+  width: 80px;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: white;
+  background: #0288D1;
+  border-radius: 3px 0 0 3px;
+  -webkit-transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
+  transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
+  -webkit-transform: translateZ(0) translateX(0);
+          transform: translateZ(0) translateX(0);
+}
+
+form input[type="text"]:focus, form input[type="password"]:focus {
+  padding-left: 10px;
+}
+
+form input[type="text"]:focus + label, form input[type="password"]:focus + label {
+  -webkit-transform: translateZ(0) translateX(-100%);
+          transform: translateZ(0) translateX(-100%);
+}
+
+
+form button {
+  position: relative;
+  overflow: hidden;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: white;
+  border: none;
+  background: #0288D1;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
+  transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
+  -webkit-transform: translateZ(0) translateX(0);
+          transform: translateZ(0) translateX(0);
+  z-index: 2;
+}
+form button:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #01579B;
+  height: 100%;
+  width: 100%;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
+  transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
+  -webkit-transform: translateZ(0) scale(0);
+          transform: translateZ(0) scale(0);
+  z-index: -1;
+}
+form button:hover:before, form button:focus:before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
+  transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
+}

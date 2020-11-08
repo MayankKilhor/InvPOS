@@ -49,7 +49,7 @@ if(isset($_POST['btnupdate'])){
          
             swal({
             title: "Good job!'.$_SESSION['username'].'",
-            text: "Password is changed!!",
+            text: " New Password is changed!!",
             icon: "success",
             button: "Ok!",
             }); 
@@ -83,7 +83,7 @@ if(isset($_POST['btnupdate'])){
          jQuery(function validation(){
          
             swal({
-            title: "New and Confirm passwords are different!",
+            title: "Username Or Phone are different!",
             text: "Password not changed!!",
             icon: "error",
             button: "Ok!",

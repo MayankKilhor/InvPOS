@@ -1,14 +1,16 @@
-
 <?php
 include_once'connectdb.php';
 session_start();
-
-error_reporting(0);
-if($_SESSION['useremail']=="" OR $_SESSION['role']=="User"){
+if($_SESSION['useremail']==""){
     
     header('location:index.php');
 }
-include_once'header.php';
+if( $_SESSION['role']=="User"){
+    include_once'headeruser.php';
+    
+}elseif($_SESSION['role']=="Admin"){
+    include_once'header.php';
+}
 
 ?>
 
@@ -17,7 +19,7 @@ include_once'header.php';
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Product List
+        Order List
         <small></small>
       </h1>
       <ol class="breadcrumb">
@@ -28,28 +30,28 @@ include_once'header.php';
 
     <!-- Main content -->
     <section class="content container-fluid">
-             
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
-            <div class="box box-primary">
+             <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">Product List</h3>
+              <h3 class="box-title">Order List</h3>
             </div>
-                            <div style="overflow-x:auto">
-            <table id="tableproduct" class="table table-striped">
+            <!-- /.box-header -->
+            <!-- form start -->
+            
+            <div class="box-body">
+            <div style="overflow-x:auto">
+            <table id="orderlisttable" class="table table-striped">
                         <thead>
                             
                         <tr>
 <!--                        <th>#</th>-->
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Purchase Price</th>
-                        <th>Sale Price</th>
-                        <th>Stock</th>
-                        <th>Description</th>
-                        <th>Image</th>
-                        <th>View</th>
+                        <th>Invoice ID</th>
+                        <th>Customer Name</th>
+                        <th>Order Date</th>
+                        <th>Total</th>
+                        <th>Paid</th>
+                        <th>Due</th>
+                        <th>Payment Type</th>
+                        <th>Print</th>
                         <th>Edit</th>
                         <th>Delete</th>
                         </tr>    
@@ -58,30 +60,30 @@ include_once'header.php';
                         <tbody>
                             
                             <?php
-                                $select=$pdo->prepare("select * from tbl_product order by pid desc");
+                                $select=$pdo->prepare("select * from tbl_invoice order by invoice_id desc");
                                 $select->execute();
                                 while($row=$select->fetch(PDO::FETCH_OBJ)){
                                     
                                     echo '
                                     <tr>
                                   
-                                    <td>'.$row->pname.'</td>
-                                    <td>'.$row->pcategory.'</td>
-                                    <td>'.$row->purchaseprice.'</td>
-                                    <td>'.$row->saleprice.'</td>
-                                    <td>'.$row->pstock.'</td>
-                                    <td>'.$row->pdescription.'</td>
-                                    <td><img src="productimages/'.$row->pimage.'" class="img-rounded" width="40px" height="40px" /></td>
+                                    <td>'.$row->invoice_id.'</td>
+                                    <td>'.$row->customer_name.'</td>
+                                    <td>'.$row->order_date.'</td>
+                                    <td>'.$row->total.'</td>
+                                    <td>'.$row->paid.'</td>
+                                    <td>'.$row->due.'</td>
+                                    <td>'.$row->payment_type.'</td>
                                     <td>
-                                     <a href="viewproduct.php?id='.$row->pid.'" class="btn btn-success" role="button"><i style="color:#ffffff" data-toggle="tooltip" class="fa fa-eye"></i> <span>  View </span></a>
+                                     
+                                    <a href="invoice_80mm.php?id='.$row->invoice_id.'" class="btn btn-warning" role="button" title="Print Invoice" target="_blank"><i style="color:#ffffff" data-toggle="tooltip" class="fa fa-print" ></i> <span></span></a>
+                                    </td>
+                                    <td>
+                                     <a href="editorder.php?id='.$row->invoice_id.'" class="btn btn-info" role="button" title="Edit Order"><i style="color:#ffffff" data-toggle="tooltip" class="fa fa-edit" ></i> <span></span></a>
                                     
                                     </td>
                                     <td>
-                                     <a href="editproduct.php?id='.$row->pid.'" class="btn btn-info" role="button"><i style="color:#ffffff" data-toggle="tooltip" class="fa fa-edit"></i> <span>  Edit </span></a>
-                                    
-                                    </td>
-                                    <td>
-                                     <button id='.$row->pid.' class="btn btn-danger btndelete" role="button"><i style="color:#ffffff" data-toggle="tooltip" class="fa fa-trash-o"></i> <span>  Delete</span></a>
+                                     <button id='.$row->invoice_id.' class="btn btn-danger btndelete" role="button" title="Delete Order"><i style="color:#ffffff" data-toggle="tooltip" class="fa fa-trash-o" ></i> <span></span></a>
                                     
                                     </td>
                                     ';
@@ -94,14 +96,16 @@ include_once'header.php';
                         </table>
                 </div>
             
-        </div>     
-    </section>
     <!-- /.content -->
   </div>
+        </div>
+</section>
+        
+</div>
   <!-- /.content-wrapper -->
 <script>
   $(document).ready(function () {
-    $('#tableproduct').DataTable({
+    $('#orderlisttable').DataTable({
         "order":[[0,"desc"]]
     })
   })
@@ -115,11 +119,8 @@ include_once'header.php';
 
 </script>
 
-
-
 <script>
-
-$(document).ready(function(){
+        $(document).ready(function(){
     
     $('.btndelete').click(function(){
         
@@ -127,8 +128,8 @@ $(document).ready(function(){
         var id=$(this).attr("id");
         
         swal({
-              title: "Are you sure you want to delete this product?",
-              text: "Once Product deleted, you will not be able to recover it!!",
+              title: "Are you sure you want to delete this order?",
+              text: "Once Order deleted, you will not be able to recover it!!",
               icon: "warning",
               buttons: true,
               dangerMode: true,
@@ -137,21 +138,21 @@ $(document).ready(function(){
               if (willDelete) {
                   
                   $.ajax({
-                        url:'productdelete.php',
+                        url:'orderdelete.php',
                         type:'post',
                         data:{
-                            productid:id
+                            iid:id
                         },
                         success:function(data){
                              tdh.parents('tr').hide();
                         }
                     })
                   
-                swal("Your Product has been deleted!", {
+                swal("Your Order has been deleted!", {
                   icon: "success",
                 });
               } else {
-                swal("Your Product is safe!");
+                swal("Your Order is safe!");
               }
             });
         
@@ -165,7 +166,6 @@ $(document).ready(function(){
 
 
 </script>
-
 
  <?php
 

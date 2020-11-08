@@ -170,7 +170,7 @@ if(isset($_POST['btnaddproduct'])){
                             <div class="form-group">
                             <label>Product Name</label>
                             <input type="text" class="form-control" name="txt_name" placeholder="Enter Product Name" required>
-                        
+                          </div>
                       <div class="form-group">
                             <label>Category</label>
                             <select class="form-control" name="select_option" required>
@@ -193,16 +193,27 @@ if(isset($_POST['btnaddproduct'])){
                         </div>
                       <div class="form-group">
                             <label>Purchase Price</label>
+                            <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-inr"></i>
+                              </div>
                             <input type="number" min="1" step="1" class="form-control" name="txt_pur_price" placeholder="Enter Purchase Price" required>
                         </div>
+                          </div>
                       <div class="form-group">
                             <label>Sale Price</label>
+                          <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-inr"></i>
+                              </div>
                             <input type="number" min="1" step="1" class="form-control" name="txt_sale_price" placeholder="Enter Sale Price" required>
                         </div>
+                          </div>
                       
                       </div>
                             
-                      </div>
+                      
+                
                       <div class="col-md-6">
                             <div class="form-group">
                             <label>Stock</label>

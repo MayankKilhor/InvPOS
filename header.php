@@ -21,14 +21,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     
     <!-- DataTables -->
+    <script src="Chart.js-2.9.4/dist/Chart.min.js"></script>
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!--<script src="bower_components/sweetalert/sweetalert.js"></script>-->
+     <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- daterange picker -->
+  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    
   <!-- Ionicons -->
+    
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
@@ -48,6 +56,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+    <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    
+     <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="plugins/iCheck/all.css">
+    
+    <!-- iCheck 1.0.1 -->
+<script src="plugins/iCheck/icheck.min.js"></script>
+    
+   
+    
+    <!-- Select2 -->
+<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -99,14 +121,14 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="dist/img/userimage.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs"><?php echo $_SESSION['username'];  ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="dist/img/userimage.png" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $_SESSION['useremail'];  ?>
@@ -141,16 +163,16 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="dist/img/userimage.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>WELCOME <?php echo $_SESSION['username'];  ?></p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+
         </div>
       </div>
 
       <!-- search form (Optional) -->
+<!--
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -160,6 +182,7 @@ desired effect
             </span>
         </div>
       </form>
+-->
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
@@ -169,8 +192,24 @@ desired effect
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li><a href="category.php"><i class="fa fa-list-alt"></i> <span>Category</span></a></li>
         <li><a href="addproduct.php"><i class="fa fa-dashboard"></i> <span>Add Product</span></a></li>
-        <li><a href="productlist.php"><i class="fa fa-list-alt"></i> <span>Product List</span></a></li>
+        <li><a href="productlist.php"><i class="fa fa-list-ul"></i> <span>Product List</span></a></li>
+        <li><a href="createorder.php"><i class="fa fa-first-order"></i> <span>Create Order</span></a></li>
+        <li><a href="orderlist.php"><i class="fa fa-list-ul"></i> <span>Order List</span></a></li>
+          
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i> <span>Sales Report</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="tablereport.php"><i class="fa fa-circle-o"></i>Table Report</a></li>
+            <li><a href="graphreport.php"><i class="fa fa-circle-o"></i>Graph Report</a></li>
+          </ul>
+        </li>
         <li><a href="registration.php"><i class="fa fa-registered"></i> <span>Registration</span></a></li>
+          
 
           
           

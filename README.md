@@ -8,6 +8,7 @@ All these features make it easy for the user to use our application and keeptrac
 ## Contributors
 
 - Mayank Kilhor
+- Shelly Mohanty
 
 ## License  & copyright
 
